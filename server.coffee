@@ -32,7 +32,7 @@ router.use (req, res, next) ->
 # ----------------------------------------------------
 
 # get all the bears (accessed at GET http://localhost:8080/api/bears)
-router.route("/").get (req, res) ->
+router.route("/api").get (req, res) ->
   request
     .get("https://ws-eu1.brightpearl.com/public-api/jonprod/product-service/product-search?SKU=" + req.query.sku)
     .set('Accept', 'application/json')
@@ -40,9 +40,12 @@ router.route("/").get (req, res) ->
     .set("brightpearl-account-token", "H5uk2+Onjbbc6JrWbBXrOMe+Qrs9Qf2IzkIyc1Vhq+g=")
     .end (results) ->
       res.send results.body
+      
+router.route("/").get (req, res) ->
+  res.send {}
 
 # REGISTER OUR ROUTES -------------------------------
-app.use "/api", router
+app.use "/", router
 
 # START THE SERVER
 # =============================================================================
