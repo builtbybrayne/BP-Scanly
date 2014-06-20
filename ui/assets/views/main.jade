@@ -1,0 +1,51 @@
+html
+head
+	link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+	link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+
+	script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js')
+
+body(ng-app="app")
+	.container(ng-controller="HomeCtrl")
+		.row
+			.col-md-12
+		h1
+			| {{ product.name || 'Scan an item' }}
+			small(data-ng-bind="product.sku")
+			| {{ resultsssss }}
+		form(data-ng-submit="scan()")
+			input#scan.form-control(placeholder='Scan...', data-ng-model="sku")
+		form(data-ng-submit="update()", data-ng-show="product")
+			label Current quantity
+			input.form-control(data-ng-model="product.onHand")
+	.row(data-ng-show="serverProducts")
+		.col-md-12
+		{{serverProducts}}
+	.row(data-ng-show="product")
+		.col-md-6
+			a.btn.btn-default.input-block-level
+				i.fa.fa-pencil
+		.col-md-6
+			a.btn.btn-primary.input-block-level(data-ng-click="reset()")
+				i.fa.fa-check
+	.row
+		.col-md-12
+			table.table(ng-show="cachedProducts.length > 0")
+				thead
+					tr
+						th Name
+						th SKU
+						th Original Quantity
+						th Current Quantity
+				tbody
+					tr(data-ng-repeat="cachedProduct in cachedProducts")
+						td {{ cachedProduct.name }}
+						td {{ cachedProduct.sku }}
+						td {{ cachedProduct.originalValue }}
+						td
+							span(data-ng-hide="cachedProduct == product", data-ng-bind="cachedProduct.onHand")
+							input.form-control(data-ng-show="cachedProduct == product", data-ng-model="cachedProduct.onHand")
+
+					
