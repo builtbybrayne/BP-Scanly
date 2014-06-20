@@ -5,5 +5,8 @@
     "express": "~4.0.0",
     "body-parser": "~1.0.1",
     "superagent": "^0.18.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.1"
   }
 }
