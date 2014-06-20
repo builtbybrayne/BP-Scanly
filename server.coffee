@@ -44,7 +44,9 @@ router.route("/api").get (req, res) ->
     .set("brightpearl-account-token", "H5uk2+Onjbbc6JrWbBXrOMe+Qrs9Qf2IzkIyc1Vhq+g=")
     .end (results) ->
       res.send results.body
-      
+
+app.use('/public', express.static(__dirname + '/ui/public'));
+
 router.route("/").get (req, res) ->
   res.render "main"
 

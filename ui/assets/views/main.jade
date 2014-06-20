@@ -2,13 +2,12 @@ html
 head
 	link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
 	link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+	link(rel='stylesheet', href='public/scanly.min.css')
 
 	script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js')
 	script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
 	script(src='//cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js')
-	script
-		:coffee
-			console.log 'This is coffee script'
+	script(src='public/scanly.min.js')
 
 body(ng-app="app")
 	.container(ng-controller="HomeCtrl")
