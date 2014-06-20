@@ -4,6 +4,7 @@
 # call the packages we need
 express = require("express")
 bodyParser = require("body-parser")
+request = require "superagent"
 app = express()
 
 # configure app
@@ -23,18 +24,22 @@ router.use (req, res, next) ->
 
 
 # test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.route("/").get (req, res) ->
-  res.json message: "hooray! welcome to our apis!"
+#router.route("/").get (req, res) ->
+#  res.json message: "hooray! welcome to our apis!"
 
 
 # on routes that end in /bears
 # ----------------------------------------------------
 
 # get all the bears (accessed at GET http://localhost:8080/api/bears)
-router.route("/products").get (req, res) ->
-  res.json message: "hooray! welcome to our api!"
-
-
+router.route("/").get (req, res) ->
+  request
+    .get("https://ws-eu1.brightpearl.com/public-api/jonprod/product-service/product-search?SKU=" + req.query.sku)
+    .set('Accept', 'application/json')
+    .set("brightpearl-app-ref", "jonprod_scanly")
+    .set("brightpearl-account-token", "H5uk2+Onjbbc6JrWbBXrOMe+Qrs9Qf2IzkIyc1Vhq+g=")
+    .end (results) ->
+      res.send results.body
 
 # REGISTER OUR ROUTES -------------------------------
 app.use "/api", router
