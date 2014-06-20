@@ -11,6 +11,10 @@ app = express()
 app.use bodyParser()
 port = process.env.PORT or 8080 # set our port
 
+# Views
+app.set('views', __dirname + "/ui/assets/views")
+app.set 'view engine', 'jade'
+
 # ROUTES FOR OUR API
 # =============================================================================
 
@@ -42,7 +46,7 @@ router.route("/api").get (req, res) ->
       res.send results.body
       
 router.route("/").get (req, res) ->
-  res.send {}
+  res.render "main"
 
 # REGISTER OUR ROUTES -------------------------------
 app.use "/", router
