@@ -12,7 +12,7 @@ app.use bodyParser()
 port = process.env.PORT or 8080 # set our port
 
 # Views
-app.set('views', __dirname + "/ui/assets/views")
+app.set 'views', __dirname + "/ui/assets/views"
 app.set 'view engine', 'jade'
 
 # ROUTES FOR OUR API
